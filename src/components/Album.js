@@ -9,7 +9,6 @@ import { faHeart as brokenHeart } from "@fortawesome/free-regular-svg-icons";
 
 function Album() {
   const navigate = useNavigate();
-  const { id } = useParams();
   const [data, setData] = useState([]);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [favorites, setFavorites] = useState([]);
