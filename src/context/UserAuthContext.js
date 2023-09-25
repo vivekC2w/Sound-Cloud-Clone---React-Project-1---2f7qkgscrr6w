@@ -11,9 +11,7 @@ import { auth } from "../firebase";
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState("");
   
-
   function signUp(email, password, age, gender) {
     return createUserWithEmailAndPassword(auth, email, password, age, gender);
   }
