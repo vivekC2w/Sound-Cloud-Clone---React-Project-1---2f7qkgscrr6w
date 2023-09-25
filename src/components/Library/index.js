@@ -3,11 +3,9 @@ import { useNavigate } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as brokenHeart } from "@fortawesome/free-regular-svg-icons";
 
 function Library() {
-  const navigate = useNavigate();
   const [likedAlbums, setLikedAlbums] = useState([]);
 
   useEffect(() => {
