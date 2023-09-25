@@ -1,0 +1,103 @@
+.home{
+    padding: 30px;
+    position: relative;
+}
+
+.h1{
+    font-size: 32px;
+    border-bottom: 1px solid #f2f2f2;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.h3{
+    font-size: 24px;
+}
+
+.soundCard{
+    margin-top: 20px;
+    width: 220px;
+    height: 300px;
+    position: relative;
+}
+
+.soundCard img{
+    width: 100%;
+    cursor: pointer;
+}
+
+.soundCard-mood{
+    font-size: .8rem;
+    color: #999;
+    margin-bottom: 30px;
+}
+.playIcon{
+    background: #f50;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    border-radius: 50%;
+    top: 30%;
+    left: 39%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.audioBar{
+    position: sticky;
+    bottom: 0;
+    height: 48px;
+    border-top: 1px solid #cecece;
+    z-index: 99999;
+    background-color: #f2f2f2;
+}
+
+.audio{
+    width: 1240px;
+    margin: auto;
+}
+
+.hero {
+    position: relative;
+    background-image: url("https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists@2x-00444712.jpg");
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: white;
+    padding: 200px 0; 
+  }
+  
+  .hero-content {
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .frontHero__title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .frontHero__tagline {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .header-signin button,
+  .header-createAcc button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px;
+  }
+  
+  .header-signin button:hover,
+  .header-createAcc button:hover {
+    background-color: #0056b3;
+  }
+  
