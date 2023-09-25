@@ -19,8 +19,6 @@ function Head() {
   const userAuthentication = useSelector((store) => store.authentication);
   const dispatch = useDispatch();
 
-  const { logOut } = useUserAuth();
-
   useEffect(() => {
     //make an api call after every key press
     //but if the difference between 2 API calls is < 200ms
