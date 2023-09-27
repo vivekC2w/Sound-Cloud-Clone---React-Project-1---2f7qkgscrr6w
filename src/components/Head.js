@@ -3,7 +3,6 @@ import "../styles/header.css";
 import Logo from "../assets/logo.png";
 import Icon from "../assets/icon.svg";
 import { Link, useNavigate } from "react-router-dom";
-import { useUserAuth } from "../context/UserAuthContext";
 import { useDispatch, useSelector } from "react-redux";
 import { cacheResults } from "../utils/searchSlice";
 import { setUser, logout } from "../utils/userSlice";
@@ -46,7 +45,7 @@ function Head() {
   //make an api call after 200ms
   //this search is using live api, debouncing, caching
   const getSearchSuggestions = async () => {
-    console.log(searchQuery);
+    // console.log(searchQuery);
     const data = await fetch(
       `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${searchQuery}`
     );
@@ -61,7 +60,7 @@ function Head() {
   };
 
   useEffect(() => {
-    console.log(userAuthentication);
+    // console.log(userAuthentication);
     if (userAuthentication.isAuthenticated) {
       setIsAuthenticated(true);
     }

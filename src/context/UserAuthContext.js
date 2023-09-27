@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -36,14 +36,6 @@ export function UserAuthContextProvider({ children }) {
     return signInWithPopup(auth, facebookAuthProvider);
   }
 
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-  //     setUser(currentUser);
-  //   });
-  //   return () => {
-  //     unsubscribe();
-  //   };
-  // }, []);
   return (
     <userAuthContext.Provider
       value={{ signUp, signIn, logOut, googleSignIn, facebookSignIn }}

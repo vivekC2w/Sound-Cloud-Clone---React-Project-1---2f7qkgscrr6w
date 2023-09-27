@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import ReactAudioPlayer from "react-audio-player";
 import Button from "react-bootstrap/Button";
@@ -55,7 +55,7 @@ function Album() {
     // const songId = data.songs[currentTrackIndex]._id;
     const action = favorites.includes(songId) ? "remove" : "add";
     fetch(`https://academics.newtonschool.co/api/v1/music/favorites/like`, {
-      method: "POST",
+      method: "PATCH",
       headers: {
         Authorization: `Bearer ${window.sessionStorage.getItem("jwt")}`,
         projectID: "f104bi07c490",

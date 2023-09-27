@@ -84,19 +84,6 @@ const Home = () => {
     fetcher("mood", "excited", sortOptions, page, limit);
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // useEffect(() => {
-
-
-  //   if (state.isPlaying && state.soundId && state.sound) {
-  //       //audioRef.current.audio.play();
-  //   }
-
-  //   if (!state.isPlaying && state.soundId && state.sound){
-  //       //audioRef.current.audio.pause();
-  //   }
-  // }, [state.isPlaying, state.soundId]);
-
   const handleMouseHover = (category, id, flag) => {
     setState((prevState) => ({
       ...prevState,
