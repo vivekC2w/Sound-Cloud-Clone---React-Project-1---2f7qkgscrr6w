@@ -13,6 +13,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UpdatePassword from "./components/UpdatePass";
 import { Provider } from "react-redux";
 import store from "./utils/store";
+import Hero from "./components/Hero";
 
 const appRouter = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/upload",
         element: <Upload />,
+      },
+      {
+        path: "/",
+        element: <Hero />,
       },
       {
         path: "/*",
