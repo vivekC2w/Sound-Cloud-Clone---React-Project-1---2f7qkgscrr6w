@@ -45,16 +45,21 @@ function Head() {
   //make an api call after 200ms
   //this search is using live api, debouncing, caching
   const getSearchSuggestions = async () => {
-    // console.log(searchQuery);
+    if (!searchQuery.trim()) return;
     const data = await fetch(
-      `http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=${searchQuery}`
+      `https://academics.newtonschool.co/api/v1/music/song?search={"title":"${searchQuery}"}&limit=10`,
+      {
+        headers: {
+          projectId: "f104bi07c490",
+        },
+      }
     );
     const json = await data.json();
-    // console.log(json[1]);
-    setSuggestions(json[1]);
+    console.log(json?.data);
+    setSuggestions(json?.data);
     dispatch(
       cacheResults({
-        [searchQuery]: json[1],
+        [searchQuery]: json?.data,
       })
     );
   };
@@ -85,10 +90,10 @@ function Head() {
     setIsAuthenticated(false);
   };
 
-  const handleSearchResultClick = (selectedQuery) => {
+  const handleSearchResultClick = (title) => {
     // Navigate to the Home component with the selected search query as a query parameter
     console.log("handlesearch clicked");
-    navigate(`/home?query=${selectedQuery}`);
+    navigate(`/search?query=${title}`);
   };
 
   return (
@@ -117,14 +122,22 @@ function Head() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setShowSuggestions(false)}
+              // onBlur={() => setShowSuggestions(false)}
             />
             {showSuggestions && (
               <div className="header-search-suggestions">
                 <ul>
-                  {suggestions.map((s) => (
-                    <li key={s} onClick={() => handleSearchResultClick(s)}>
-                      {s}
+                  {suggestions?.map(({ title, _id }) => (
+                    <li
+                      key={_id}
+                      onClick={() => {
+                        console.log("clicked");
+
+                        handleSearchResultClick(title);
+                        setShowSuggestions(false);
+                      }}
+                    >
+                      {title}
                     </li>
                   ))}
                 </ul>

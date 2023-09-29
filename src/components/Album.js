@@ -6,6 +6,10 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as brokenHeart } from "@fortawesome/free-regular-svg-icons";
+import ListCard from "./ListCard";
+import axios from "axios";
+import { addRemoveToWatchlist } from "../api";
+
 
 function Album() {
   const navigate = useNavigate();
@@ -52,31 +56,12 @@ function Album() {
 
   const toggleLike = (songId) => {
     setLiked(!liked);
-    // const songId = data.songs[currentTrackIndex]._id;
-    const action = favorites.includes(songId) ? "remove" : "add";
-    fetch(`https://academics.newtonschool.co/api/v1/music/favorites/like`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${window.sessionStorage.getItem("jwt")}`,
-        projectID: "f104bi07c490",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        songId,
-        // action,
-      }),
-    })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.status === "success") {
-          // Update favorites state
-          if (action === "add") {
-            setFavorites([...favorites, songId]);
-          } else {
-            setFavorites(favorites.filter((id) => id !== songId));
-          }
-        }
-      });
+    const getFavoritesData = async() => {
+      const data = addRemoveToWatchlist(songId);
+      setFavorites(data?.data?.songs)
+      console.log(data);
+    }
+    getFavoritesData();
   };
 
   useEffect(() => {
@@ -135,36 +120,7 @@ function Album() {
       <ListGroup>
         {data.songs &&
           data.songs.map((song, index) => (
-            <ListGroup.Item
-              key={index}
-              className="d-flex align-items-center justify-content-between"
-            >
-              <div className="d-flex align-items-center">
-                <img
-                  src={song.thumbnail}
-                  alt={song.title}
-                  style={{ marginRight: "10px", width: "50px", height: "50px" }}
-                />
-                <div className="song-number">{index + 1}</div>
-                <div className="song-title" style={{ marginLeft: "10px" }}>
-                  {song.title}
-                </div>
-                <div className="artist-name" style={{ marginLeft: "10px" }}>
-                  {data.artists[0].name}
-                </div>
-              </div>
-              <Button
-                variant="outline-primary"
-                className="like-button"
-                onClick={() => toggleLike(song._id)}
-              >
-                <FontAwesomeIcon
-                  icon={favorites.includes(song._id) ? solidHeart : brokenHeart}
-                  className="heart-icon"
-                />
-                {favorites.includes(song._id) ? "Liked" : "Like"}
-              </Button>
-            </ListGroup.Item>
+              <ListCard key={song._id} song={song} favorites={favorites} index={index} data={data} toggleLike={toggleLike}/>           
           ))}
       </ListGroup>
     </>

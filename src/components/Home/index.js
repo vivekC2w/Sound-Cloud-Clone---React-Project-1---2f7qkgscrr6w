@@ -66,6 +66,8 @@ const Home = () => {
       .then((data) => data.json())
       .then((json) => {
         setState((prevState) => ({ ...prevState, [value]: json.data }));
+      }).catch((error) => {
+        console.log(error);
       });
   };
 
