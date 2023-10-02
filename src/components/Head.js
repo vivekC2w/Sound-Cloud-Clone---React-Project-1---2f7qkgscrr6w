@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "../styles/header.css";
 import Logo from "../assets/logo.png";
 import Icon from "../assets/icon.svg";
@@ -9,6 +9,8 @@ import { setUser, logout } from "../utils/userSlice";
 
 function Head() {
   const navigate = useNavigate();
+  const ref = useRef(null);
+  const searchRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -65,6 +67,32 @@ function Head() {
   };
 
   useEffect(() => {
+
+    function hideModal(event) {
+      console.log(event);
+      const clickedElement = event.target;
+      const searchSuggestionElement = ref.current;
+      console.log(searchSuggestionElement);
+
+      if(searchSuggestionElement?.contains(clickedElement) || clickedElement === searchRef.current) {
+        //It means we clicked on
+        return;
+      } else {
+        setShowSuggestions(false);
+      }
+    }
+
+    console.log(ref.current, "ref Current");
+
+    document.addEventListener('click', hideModal);
+
+    //Cleanup
+    return () => {
+      document.removeEventListener('click', hideModal);
+    }
+  }, []);
+
+  useEffect(() => {
     // console.log(userAuthentication);
     if (userAuthentication.isAuthenticated) {
       setIsAuthenticated(true);
@@ -91,9 +119,9 @@ function Head() {
   };
 
   const handleSearchResultClick = (title) => {
-    // Navigate to the Home component with the selected search query as a query parameter
-    console.log("handlesearch clicked");
-    navigate(`/search?query=${title}`);
+    console.log("handlesearch clicked", title);
+    navigate(`/search?q=${title}`);
+    window.location.reload();
   };
 
   return (
@@ -122,17 +150,16 @@ function Head() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setShowSuggestions(true)}
-              // onBlur={() => setShowSuggestions(false)}
+              ref={searchRef}
             />
             {showSuggestions && (
-              <div className="header-search-suggestions">
+              <div className="header-search-suggestions" ref={ref}>
                 <ul>
                   {suggestions?.map(({ title, _id }) => (
                     <li
                       key={_id}
                       onClick={() => {
                         console.log("clicked");
-
                         handleSearchResultClick(title);
                         setShowSuggestions(false);
                       }}

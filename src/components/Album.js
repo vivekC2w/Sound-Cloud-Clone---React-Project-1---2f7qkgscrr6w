@@ -7,9 +7,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as brokenHeart } from "@fortawesome/free-regular-svg-icons";
 import ListCard from "./ListCard";
-import axios from "axios";
-import { addRemoveToWatchlist } from "../api";
-
 
 function Album() {
   const navigate = useNavigate();
@@ -56,19 +53,38 @@ function Album() {
 
   const toggleLike = (songId) => {
     setLiked(!liked);
-    const getFavoritesData = async() => {
-      const data = addRemoveToWatchlist(songId);
-      setFavorites(data?.data?.songs)
-      console.log(data);
-    }
-    getFavoritesData();
+    const action = favorites.includes(songId) ? "remove" : "add";
+    fetch(`https://academics.newtonschool.co/api/v1/music/favorites/like`, {
+      method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${window.sessionStorage.getItem("jwt")}`,
+        projectID: "f104bi07c490",
+        "Content-Type" : "application/json", 
+      },
+      body: JSON.stringify({
+        "songId" : songId
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === "success") {
+          // Update favorites state
+          if (action === "add") {
+            setFavorites([...favorites, songId]);
+          } else {
+            setFavorites(favorites.filter((id) => id !== songId));
+          }
+        }
+      });
   };
 
   useEffect(() => {
     if (data.songs && data.songs.length > 0) {
       // Check if the current song is in favorites
       const currentSongId = data.songs[currentTrackIndex]._id;
-      setLiked(favorites.includes(currentSongId));
+      if(currentSongId) {
+        setLiked(favorites?.includes(currentSongId));
+      }
     }
   }, [currentTrackIndex, data.songs, favorites]);
 
@@ -98,7 +114,6 @@ function Album() {
                 </div>
                 <div className="artist-name">
                   {data.artists[0].name}{" "}
-                  {/* Assuming one artist for simplicity */}
                 </div>
               </div>
               <Button

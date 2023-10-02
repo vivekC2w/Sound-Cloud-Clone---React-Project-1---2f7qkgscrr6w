@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const BASE_URL = 'https://academics.newtonschool.co/api/v1/music';
+
 const api = axios.create({
-    baseURL: 'https://academics.newtonschool.co/api/v1/music',
+    baseURL: BASE_URL,
     headers: {
         projectId: "f104bi07c490",
     },
@@ -35,6 +37,16 @@ const getWatchlist = async () => {
         return [];
     }
 }
+
+export const fetchDataFromApi = async (url, options = {}) => {
+    try {
+        const response = await api.get(url, options);
+        return response.data;
+      } catch (error) {
+        console.log(`Error fetching data from API: ${error}`);
+        return null;
+      }
+  };
 
 export { addRemoveToWatchlist, getWatchlist };
 

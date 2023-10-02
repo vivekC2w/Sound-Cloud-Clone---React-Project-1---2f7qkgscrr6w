@@ -14,6 +14,7 @@ import UpdatePassword from "./components/UpdatePass";
 import { Provider } from "react-redux";
 import store from "./utils/store";
 import Hero from "./components/Hero";
+import Search  from "./components/Search";
 
 const appRouter = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/",
         element: <Hero />,
+      },
+      {
+        path: "/search",
+        element: <Search />,
       },
       {
         path: "/*",
