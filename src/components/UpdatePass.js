@@ -7,12 +7,12 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 function UpdatePassword() {
   const [showPassword, setShowPassword] = useState(false);
-  const [error] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const [user, setUser] = useState({
-    username:"",
+    username: "",
     email: "",
-    currentPassword: "",
+    passwordCurrent: "",
     password: "",
   });
   let name, value;
@@ -25,46 +25,47 @@ function UpdatePassword() {
 
   const postData = async (e) => {
     e.preventDefault();
-    const { username, email, currentPassword, password } = user;
 
-    if (username && email && currentPassword && password) {
-      const data = await fetch(
-        "https://academics.newtonschool.co/api/v1/user/updateMyPassword",
-        {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            projectId: "f104bi07c490",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            currentPassword,
-            password,
-            appType: 'music',
-          }),
-        }
-      );
-      if (data) {
-        setUser({
-            username: "",
-            email: "",
-            currentPassword: "",
-            password: "",
-          
-        });
-        let json = await data.json();
-        console.log(json);
-        if (json.status === "fail") {
-          alert(json.message);
-        } else {
-          window.sessionStorage.setItem("jwt", json.token);
-          alert("Password Updated Succesfully");
+    try {
+      const { username, email, passwordCurrent, password } = user;
+
+      if (username && email && passwordCurrent && password) {
+        const response = await fetch(
+          "https://academics.newtonschool.co/api/v1/user/updateMyPassword",
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              projectId: "f104bi07c490",
+              Authorization: `Bearer ${window.sessionStorage.getItem("jwt")}`,
+            },
+            body: JSON.stringify({
+              username,
+              email,
+              passwordCurrent,
+              password,
+              appType: "music",
+            }),
+          }
+        );
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+          // Password updated successfully
+          window.sessionStorage.setItem("jwt", data.token);
+          alert("Password Updated Successfully");
           navigate("/signin");
+        } else {
+          // Password update failed
+          setError(data.message);
         }
+      } else {
+        setError("Please fill in all the fields");
       }
-    } else {
-      alert("Please fill all the data");
+    } catch (error) {
+      console.error("Error updating password:", error);
+      setError("An error occurred while updating the password");
     }
   };
 
@@ -111,48 +112,48 @@ function UpdatePassword() {
             onChange={getUserData}
             sx={{ marginBottom: 2 }}
           />
-          
-            <TextField
-              placeholder="Enter your Current Password"
-              name="currentPassword"
-              fullWidth
-              type={showPassword ? "text" : "password"}
-              value={user.currentPassword}
-              onChange={getUserData}
-              sx={{ marginBottom: 2 }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    onClick={togglePasswordVisibility}
-                    edge="end"
-                    size="small"
-                  >
-                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                  </IconButton>
-                ),
-              }}
-            />
 
-            <TextField
-              placeholder="Enter your New Password"
-              name="password"
-              fullWidth
-              type={showPassword ? "text" : "password"}
-              value={user.password}
-              onChange={getUserData}
-              sx={{ marginBottom: 2 }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton
-                    onClick={togglePasswordVisibility}
-                    edge="end"
-                    size="small"
-                  >
-                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                  </IconButton>
-                ),
-              }}
-            />
+          <TextField
+            placeholder="Enter your Current Password"
+            name="passwordCurrent"
+            fullWidth
+            type={showPassword ? "text" : "password"}
+            value={user.passwordCurrent}
+            onChange={getUserData}
+            sx={{ marginBottom: 2 }}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  onClick={togglePasswordVisibility}
+                  edge="end"
+                  size="small"
+                >
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              ),
+            }}
+          />
+
+          <TextField
+            placeholder="Enter your New Password"
+            name="password"
+            fullWidth
+            type={showPassword ? "text" : "password"}
+            value={user.password}
+            onChange={getUserData}
+            sx={{ marginBottom: 2 }}
+            InputProps={{
+              endAdornment: (
+                <IconButton
+                  onClick={togglePasswordVisibility}
+                  edge="end"
+                  size="small"
+                >
+                  {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                </IconButton>
+              ),
+            }}
+          />
 
           <Button
             fullWidth

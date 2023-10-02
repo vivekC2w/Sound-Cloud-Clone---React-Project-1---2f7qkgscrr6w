@@ -67,14 +67,16 @@ function Head() {
   };
 
   useEffect(() => {
-
     function hideModal(event) {
       console.log(event);
       const clickedElement = event.target;
       const searchSuggestionElement = ref.current;
       console.log(searchSuggestionElement);
 
-      if(searchSuggestionElement?.contains(clickedElement) || clickedElement === searchRef.current) {
+      if (
+        searchSuggestionElement?.contains(clickedElement) ||
+        clickedElement === searchRef.current
+      ) {
         //It means we clicked on
         return;
       } else {
@@ -84,18 +86,20 @@ function Head() {
 
     console.log(ref.current, "ref Current");
 
-    document.addEventListener('click', hideModal);
+    document.addEventListener("click", hideModal);
 
     //Cleanup
     return () => {
-      document.removeEventListener('click', hideModal);
-    }
+      document.removeEventListener("click", hideModal);
+    };
   }, []);
 
   useEffect(() => {
     // console.log(userAuthentication);
     if (userAuthentication.isAuthenticated) {
       setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
     }
   }, [userAuthentication.isAuthenticated]);
 
@@ -112,6 +116,16 @@ function Head() {
       window.sessionStorage.removeItem("jwt");
       dispatch(logout());
       navigate("/signin");
+    } catch (err) {
+      console.log(err.message);
+    }
+    setIsAuthenticated(false);
+  };
+
+  const handleUpdatePass = async () => {
+    try {
+      // window.sessionStorage.removeItem("jwt");
+      navigate("/updatepassword");
     } catch (err) {
       console.log(err.message);
     }
@@ -173,9 +187,14 @@ function Head() {
           </div>
         </div>
         {isAuthenticated ? (
-          <div className="header-signin">
-            <button onClick={handleLogOut}>Log out</button>
-          </div>
+          <>
+            <div className="header-signin">
+              <button onClick={handleLogOut}>Log out</button>
+            </div>
+            <div className="header-signin">
+              <button onClick={handleUpdatePass}>Update Password</button>
+            </div>
+          </>
         ) : (
           <>
             <div className="header-signin">

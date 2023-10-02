@@ -8,13 +8,17 @@ import GoogleIcon from "@mui/icons-material/Google";
 import AppleIcon from "@mui/icons-material/Apple";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../utils/userSlice";
 
 function Signin() {
   const { googleSignIn, facebookSignIn } = useUserAuth();
   const [showPassword, setShowPassword] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState("");
+
+  const userAuthentication = useSelector((store) => store.authentication);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [user, setUser1] = useState({
@@ -60,7 +64,7 @@ function Signin() {
           alert(json.message);
         } else {
           window.sessionStorage.setItem("jwt", json.token);
-
+          setIsAuthenticated(false);
           dispatch(setUser("email"));
           alert("Login Succesfully");
           navigate("/home");
