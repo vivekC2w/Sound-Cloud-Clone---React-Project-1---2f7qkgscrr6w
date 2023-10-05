@@ -1,11 +1,10 @@
 import axios from 'axios';
-
-const BASE_URL = 'https://academics.newtonschool.co/api/v1/music';
+import { BASE_URL, PROJECT_ID } from './utils/constant';
 
 const api = axios.create({
     baseURL: BASE_URL,
     headers: {
-        projectId: "f104bi07c490",
+        projectId: PROJECT_ID,
     },
 });
 

@@ -1,18 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as brokenHeart } from "@fortawesome/free-regular-svg-icons";
 
-const ListCard = ({song, favorites, toggleLike, index, data}) => {
-    const [isFav, setIsFav] = useState();
-    const {_id: id} = song;
-    
-    const checkFavourites = () => {
-        const isPresent = favorites.some(({_id}) => id === _id)
-        setIsFav(isPresent);
-    }
+const ListCard = ({song, favorites, toggleLike, index}) => {
 
   return (
     <ListGroup.Item
@@ -29,9 +22,6 @@ const ListCard = ({song, favorites, toggleLike, index, data}) => {
         <div className="song-title" style={{ marginLeft: "10px" }}>
           {song.title}
         </div>
-        <div className="artist-name" style={{ marginLeft: "10px" }}>
-          {data.artists[0].name}
-        </div>
       </div>
       <Button
         variant="outline-primary"
@@ -39,10 +29,10 @@ const ListCard = ({song, favorites, toggleLike, index, data}) => {
         onClick={() => toggleLike(song._id)}
       >
         <FontAwesomeIcon
-          icon={isFav ? solidHeart : brokenHeart}
+          icon={favorites?.includes(song._id) ? solidHeart : brokenHeart}
           className="heart-icon"
         />
-        {isFav ? "Liked" : "Like"}
+        {favorites?.includes(song._id) ? "Liked" : "Like"}
       </Button>
     </ListGroup.Item>
   );

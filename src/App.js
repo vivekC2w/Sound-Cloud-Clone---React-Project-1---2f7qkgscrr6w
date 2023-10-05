@@ -1,20 +1,21 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "../src/components/Home";
-import Body from "../src/components/Body";
+import Body from "./components/Body/Body";
 import Feed from "./components/Feed";
 import Library from "./components/Library";
-import Error from "./components/Error";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
+import Error from "./components/Error/Error";
+import Signin from "./components/SignIn/Signin";
+import Signup from "./components/SignUp/Signup";
 import Upload from "./components/Upload";
 import { UserAuthContextProvider } from "./context/UserAuthContext";
-import Album from "./components/Album";
+import Album from "./components/Album/Album";
 import "bootstrap/dist/css/bootstrap.min.css";
-import UpdatePassword from "./components/UpdatePass";
+import UpdatePassword from "./components/UpdatePassword/UpdatePass";
 import { Provider } from "react-redux";
 import store from "./utils/store";
-import Hero from "./components/Hero";
-import Search  from "./components/Search";
+import Hero from "./components/LandingPage/Hero";
+import Search from "./components/Search";
+import Profile from "./components/Profile/Profile";
 
 const appRouter = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/signup",
         element: <Signup />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/upload",

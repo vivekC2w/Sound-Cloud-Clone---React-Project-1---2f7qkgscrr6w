@@ -1,10 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import {
-  useLocation,
-  useNavigate,
-  useParams,
-  useSearchParams,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
 import "react-multi-carousel/lib/styles.css";
 import PlayIcon from "../assets/play.svg";
@@ -16,7 +11,7 @@ const Search = () => {
   const audioRef = useRef(null);
   const queryString = window.location.search;
 
-  // Step 2: Extract the 'q' query parameter
+  //Extract the 'q' query parameter
   const urlParams = new URLSearchParams(queryString);
   const searchQuery = urlParams.get("q");
   console.log(searchQuery);
@@ -33,15 +28,6 @@ const Search = () => {
       hoverId: flag ? id : null,
     }));
   };
-
-  // const showAlbum = (sound) => {
-  //   if (window.sessionStorage.getItem("jwt")) {
-  //     navigate("/album?id=" + sound.album);
-  //   } else {
-  //     alert("You need to login first!");
-  //     navigate("/signin");
-  //   }
-  // };
 
   useEffect(() => {
     setTimeout(() => {

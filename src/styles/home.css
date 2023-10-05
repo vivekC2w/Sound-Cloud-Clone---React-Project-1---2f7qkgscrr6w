@@ -45,20 +45,6 @@
     justify-content: center;
 }
 
-.audioBar{
-    position: sticky;
-    bottom: 0;
-    height: 48px;
-    border-top: 1px solid #cecece;
-    z-index: 99999;
-    background-color: #f2f2f2;
-}
-
-.audio{
-    width: 1240px;
-    margin: auto;
-}
-
 .hero {
     position: relative;
     background-image: url("https://a-v2.sndcdn.com/assets/images/sc_landing_header_web_featured_artists@2x-00444712.jpg");

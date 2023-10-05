@@ -31,3 +31,22 @@ body {
     width: 40px !important;
     height: 38px !important;
 }
+
+.flex {
+    position: relative;
+    height: calc(100vh - 48px);
+}
+
+.audioBar{
+    position: sticky;
+    height: max-content;
+    bottom: 0;
+    border-top: 1px solid #cecece;
+    z-index: 99999;
+    background-color: #f2f2f2;
+}
+
+.audio{
+    width: 1240px;
+    margin: auto;
+}
