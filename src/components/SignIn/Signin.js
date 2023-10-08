@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUserAuth } from "../../context/UserAuthContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
@@ -33,6 +33,12 @@ function Signin() {
 
     setUser1({ ...user, [name]: value });
   };
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem("jwt")) {
+      navigate("/home");
+    }
+  }, []);
 
   const postData = async (e) => {
     e.preventDefault();
