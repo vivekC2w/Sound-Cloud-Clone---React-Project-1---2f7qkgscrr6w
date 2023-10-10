@@ -29,7 +29,7 @@ export function UserAuthContextProvider({ children }) {
     const googleAuthProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleAuthProvider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
+        // This gives us a Google Access Token. we can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
@@ -37,8 +37,6 @@ export function UserAuthContextProvider({ children }) {
         console.log(user);
         window.sessionStorage.setItem("jwt", user.email);
         window.location.reload();
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
       })
       .catch((error) => {
         // Handle Errors here.
@@ -56,7 +54,7 @@ export function UserAuthContextProvider({ children }) {
     const facebookAuthProvider = new FacebookAuthProvider();
     return signInWithPopup(auth, facebookAuthProvider)
       .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
+        // This gives us a Google Access Token. We can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
@@ -64,8 +62,6 @@ export function UserAuthContextProvider({ children }) {
         console.log(user);
         window.sessionStorage.setItem("jwt", user.email);
         window.location.reload();
-        // IdP data available using getAdditionalUserInfo(result)
-        // ...
       })
       .catch((error) => {
         // Handle Errors here.
