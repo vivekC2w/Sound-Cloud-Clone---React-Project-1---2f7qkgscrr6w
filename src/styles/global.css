@@ -50,3 +50,24 @@ body {
     width: 1240px;
     margin: auto;
 }
+
+
+.audioDetails {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-top: 1px solid #ccc;
+  }
+  
+  .audioThumbnail {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .audioTitle {
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
