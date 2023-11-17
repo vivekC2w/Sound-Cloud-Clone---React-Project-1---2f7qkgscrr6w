@@ -79,7 +79,7 @@ function Signup() {
   };
 
   return (
-    <Form method="POST">
+    <Form method="POST" style={{minHeight:'86vh', marginTop:'4rem'}}>
       <Box
         display="flex"
         flexDirection="column"
