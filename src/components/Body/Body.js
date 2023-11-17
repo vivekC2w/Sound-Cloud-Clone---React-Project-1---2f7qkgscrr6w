@@ -9,7 +9,7 @@ const Body = () => {
   const audioRef = useRef(null);
   const [pathName, setPathname] = useState("");
   let location = useLocation();
-
+  // console.log(sound);
   useEffect(() => {
     setPathname(window.location.pathname);
   }, [location]);
@@ -26,10 +26,19 @@ const Body = () => {
         pathName !== "/upload" && (
           <div className="audioBar">
             <div className="audio">
-              <audio key={sound._id} autoPlay controls ref={audioRef}>
-                <source src={sound.audio_url} type="audio/mp3" />
-                Your browser does not support the audio tag.
-              </audio>
+              <div className="audioDetails">
+                <img
+                  src={sound.thumbnail}
+                  alt="Thumbnail"
+                  className="audioThumbnail"
+                />
+
+                <audio key={sound._id} autoPlay controls ref={audioRef}>
+                  <source src={sound.audio_url} type="audio/mp3" />
+                  Your browser does not support the audio tag.
+                </audio>
+                <div className="audioTitle">{sound.title}</div>
+              </div>
             </div>
           </div>
         )}
