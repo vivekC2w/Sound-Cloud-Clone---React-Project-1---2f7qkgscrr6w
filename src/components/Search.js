@@ -34,7 +34,9 @@ const Search = () => {
       fetchDataFromApi(`song?search={"title":"${searchQuery}"}`).then((res) => {
         console.log(res);
         setResult(res?.data);
-      });
+      }).catch((error) => {
+        console.log(error);
+      })
     }, 200);
   }, []);
 
@@ -56,7 +58,7 @@ const Search = () => {
   };
 
   return (
-    <div>
+    <div style={{minHeight:'86vh', marginTop:'4rem'}}>
       {result?.map((sound, idx) => (
         <div
           className="soundCard"

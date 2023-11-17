@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as brokenHeart } from "@fortawesome/free-regular-svg-icons";
 
-const ListCard = ({song, favorites, toggleLike, index}) => {
-
+const ListCard = ({ song, favorites, toggleLike, index }) => {
   return (
     <ListGroup.Item
       key={index}

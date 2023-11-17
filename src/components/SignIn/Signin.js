@@ -157,7 +157,7 @@ function Signin() {
           >
             Continue with Google
           </Button>
-          <Button
+          {/* <Button
             fullWidth
             variant="contained"
             sx={{
@@ -172,7 +172,7 @@ function Signin() {
             startIcon={<AppleIcon />}
           >
             Continue with Apple
-          </Button>
+          </Button> */}
           {error && <Alert variant="danger">{error}</Alert>}
           <TextField
             placeholder="Enter your email"

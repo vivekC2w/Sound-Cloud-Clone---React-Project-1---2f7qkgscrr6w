@@ -126,7 +126,7 @@ const Home = () => {
   const filteredContent = state[selectedSuggestion] || [];
 
   return (
-    <div className="home">
+    <div className="home" style={{minHeight:'87.3vh'}}>
       {/* Conditionally render filtered content or normal cards */}
       {filteredContent.length > 0 ? (
         filteredContent.map((sound, idx) => (

@@ -2,10 +2,20 @@ import React, { useEffect, useState } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import ListCard from "../ReusableComponent/ListCard";
 import { BASE_URL, PROJECT_ID } from "../../utils/constant";
+import { useNavigate } from "react-router-dom";
 
 function Library() {
   const [likedAlbums, setLikedAlbums] = useState([]);
   const [favorites, setFavorites] = useState([]);
+
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (!window.sessionStorage.getItem("jwt")) {
+      alert("You need to login first!");
+      navigate("/signin");
+    }
+  }, [])
 
   useEffect(() => {
     // Fetch liked albums here using an API call and setLikedAlbums with the response data.
@@ -79,7 +89,7 @@ function Library() {
   };
 
   return (
-    <div>
+    <div style={{minHeight:'87.3vh', marginTop:'4rem'}}>
       <h2>Liked Albums</h2>
       <ListGroup>
         {likedAlbums.map((song, index) => (

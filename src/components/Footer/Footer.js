@@ -1,9 +1,10 @@
 import React from "react";
-import "../../styles/header.css";
+// import "../../styles/header.css";
+import "../../styles/global.css";
 
 function Head() {
   return (
-    <footer className="header-container">
+    <footer className="footer-container">
       <div className="header" style={{ justifyContent: "flex-start" }}>
         <div className="header-2" style={{ width: "max-content" }}>
           About us
