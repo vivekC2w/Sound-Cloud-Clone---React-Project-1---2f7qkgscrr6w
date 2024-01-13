@@ -113,7 +113,7 @@ function Album() {
 
   return (
     <>
-      <div className="audio-player p-4 bg-gray-200 rounded-lg shadow-lg">
+      <div className="audio-player p-4 bg-gray-200 rounded-lg shadow-lg" style={{ marginTop:'4rem'}}>
         {data?.songs && data?.songs?.length > 0 && (
           <ReactAudioPlayer
             src={data?.songs[currentTrackIndex]?.audio_url}
