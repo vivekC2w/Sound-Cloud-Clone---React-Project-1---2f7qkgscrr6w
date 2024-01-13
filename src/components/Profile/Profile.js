@@ -8,7 +8,7 @@ function Profile() {
   const { user, email } = userAuthentication;
   console.log(userAuthentication);
   return (
-    <div className="profile-section">
+    <div className="profile-section" style={{minHeight:'87.3vh', marginTop:'4rem'}}>
       <img
         className="profile-picture"
         src={

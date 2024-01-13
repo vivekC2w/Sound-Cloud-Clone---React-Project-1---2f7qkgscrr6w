@@ -7,7 +7,7 @@ function Head() {
     <footer className="footer-container">
       <div className="header" style={{ justifyContent: "flex-start" }}>
         <div className="header-2" style={{ width: "max-content" }}>
-          About us
+          <a href="/aboutus">About us</a>
         </div>
         <div className="header-2" style={{ width: "max-content" }}>
           Privacy policy
